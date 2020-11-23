@@ -23,7 +23,9 @@ public class Gender {
 		this.gender = gender;
 	}
 	
+	// public String showGenderInfo(String[] bitrh) {	
+		
+	}
 
 
-}
 
