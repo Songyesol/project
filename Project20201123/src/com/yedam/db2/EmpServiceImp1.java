@@ -4,30 +4,31 @@ import java.util.List;
 
 public class EmpServiceImp1 implements EmpService { // 구현클래스 
 
+		EmpDAO dao = new EmpDAO();
+		
 	@Override
 	public List getEmpList() {
-
-		return null;
+		return dao.getEmplist();
 	}
 
 	@Override
 	public EmployeeVO getEmp(int empId) {
-		return null;
+		return dao.getEmp(empId);
 	}
 
 	@Override
-	public void insertEmp(EmployeeVO empV) {
-		
+	public void insertEmp(EmployeeVO empVo) {
+		dao.insertEmp(empVo);
 	}
 
 	@Override
-	public void updaetEmp(EmployeeVO empV) {
-		
+	public void updateEmp(EmployeeVO empVo) {
+		dao.updateEmp(empVo);
 	}
 
 	@Override
 	public void deleteEmp(int empId) {
-		
+		dao.deleteEmp(empId);
 	} 
 
 }
