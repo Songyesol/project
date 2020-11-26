@@ -2,6 +2,8 @@ package com.yedam.db2;
 
 import java.util.List;
 
+import com.yedam.board.BoardVO;
+
 public interface EmpService {
 	public List getEmpList(); // 리스트조회 
 	public EmployeeVO getEmp(int empId); //한건조회 

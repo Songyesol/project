@@ -48,6 +48,7 @@ public class EmpMain {
 				String hireDate = scn.nextLine();
 
 				EmployeeVO vo = new EmployeeVO();
+				
 				vo.setEmployeeId(employeeId);
 				vo.setLastName(lastName);
 				vo.setEmail(email);

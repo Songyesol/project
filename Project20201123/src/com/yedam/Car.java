@@ -1,6 +1,6 @@
 package com.yedam;
 
-public class car {
+public class Car {
 	//field
 	private String company;
 	private String model;
@@ -8,17 +8,17 @@ public class car {
 	private int maxSpeed;
 	
 	//constructor
-	public car() { //아무것도 안붙이면 동일한 패키지 내에서 사용 가능
+	public Car() { //아무것도 안붙이면 동일한 패키지 내에서 사용 가능
 		
 	}
-	public car(String company){
+	public Car(String company){
 		this.company = company;
 	}
-	public car(String company, String model){
+	public Car(String company, String model){
 		this.company = company;
 		this.model = model;
 	}
-	public car(String company, String model, String color, int maxSpeed){
+	public Car(String company, String model, String color, int maxSpeed){
 		this.company = company;
 		this.model = model;
 		this.color = color;

@@ -70,7 +70,8 @@ public class EmpDAO { // db처리
 	// 한건입력
 	public void insertEmp(EmployeeVO vo) {
 		conn = DAO.getConnection();
-		sql = "insert into emp1(employee_id,last_name, email, job_id, hire_date)" + "values(?, ?, ?, ?, ?)";
+		sql = "insert into emp1(employee_id,last_name, email, job_id, hire_date)" 
+		+ "values(?, ?, ?, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
