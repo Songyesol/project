@@ -15,8 +15,8 @@ import com.yedam.common.DAO;
 
 public class BoardDAO {
 	Connection conn = null;
-	PreparedStatement pstm;
-	ResultSet rs;
+	PreparedStatement pstm; 
+	ResultSet rs;//select 할 때만 필요하다.결과값을 담아야 하기 때문에
 	String sql;
 
 	// 전체리스트 조회
@@ -26,15 +26,18 @@ public class BoardDAO {
 		List list = new ArrayList();
 
 		try {
-			pstm = conn.prepareStatement(sql);
-			rs = pstm.executeQuery();
+			pstm = conn.prepareStatement(sql); //쿼리 실행준비완료. 
+			rs = pstm.executeQuery(); //쿼리의 실행결과를 resultset에 담는다
 			while (rs.next()) {
+				/*.next()의 의미
+				 * 읽어올때 데이터의 처음부터 읽어오므로 next를 만나면 한 로우를 읽어오고 다음로우로 내려간다. 
+				 * next하면 데이터를 한줄한줄 내려가면서 가져오게 하는 역할 */
 				BoardVO vo = new BoardVO();
-				vo.setScptNo(rs.getInt("board_no"));
+				vo.setScptNo(rs.getInt("board_no")); //가져올 컬럼의 데이터타입에 따라 결정되고 괄호안에는 sql컬럼의 원래 이름을 적어주면 됨
 				vo.setTitle(rs.getString("title"));
 				vo.setWriter(rs.getString("writer"));
 				vo.setDate(rs.getString("creation_date"));
-				list.add(vo);
+				list.add(vo); //만들어둔 리스트에 add(추가)한다
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
