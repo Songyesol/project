@@ -14,9 +14,9 @@ public class EmpMain {
 
 		while (true) {
 
-			System.out.println("===============================================");
-			System.out.println("1.전체조회 | 2.검색 | 3.입력 | 4.수정 | 5.삭제 | 6.종료");
-			System.out.println("===============================================");
+			System.out.println("==============================================================");
+			System.out.println("1.전체조회 | 2.검색 | 3.입력 | 4.수정 | 5.삭제 | 6.부서별 조회 | 7.종료");
+			System.out.println("==============================================================");
 			System.out.println("선택> ");
 
 			int selectNo = scn.nextInt();
@@ -84,8 +84,17 @@ public class EmpMain {
 				service.deleteEmp(empId);
 				
 			} else if (selectNo == 6) {
+				System.out.println("부서명을 입력하세요> ");
+				String deptId = scn.nextLine();
+				List<EmployeeVO> list = service.getDeptList(deptId);
+				for (Object vo : list) {
+					EmployeeVO emp = (EmployeeVO) vo; // 강제 캐스팅
+					emp.showEmpInfo();
+				}
+			} else if(selectNo == 7) {
 				break;
 			}
+			
 
 		}
 		System.out.println("*프로그램 종료*");

@@ -29,6 +29,11 @@ public class EmpServiceImp1 implements EmpService { // 구현클래스
 	@Override
 	public void deleteEmp(int empId) {
 		dao.deleteEmp(empId);
+	}
+
+	@Override
+	public List<EmployeeVO> getDeptList(String dept) {
+		return dao.getDeptList(dept);
 	} 
 
 }

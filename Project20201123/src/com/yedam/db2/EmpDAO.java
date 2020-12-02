@@ -23,7 +23,7 @@ public class EmpDAO { // db처리
 		List list = new ArrayList();
 
 		try {
-			pstmt = conn.prepareStatement(sql); //텍스트 sql 호출
+			pstmt = conn.prepareStatement(sql); // 텍스트 sql 호출
 			rs = pstmt.executeQuery(); // rs에 쿼리의 결과가 담겨져있음
 			while (rs.next()) {
 				EmployeeVO vo = new EmployeeVO();
@@ -70,9 +70,8 @@ public class EmpDAO { // db처리
 	// 한건입력
 	public void insertEmp(EmployeeVO vo) {
 		conn = DAO.getConnection();
-		sql = "insert into emp1(employee_id,last_name, email, job_id, hire_date)" 
-		+ "values(?, ?, ?, ?, ?)";
-		
+		sql = "insert into emp1(employee_id,last_name, email, job_id, hire_date)" + "values(?, ?, ?, ?, ?)";
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, vo.getEmployeeId());
@@ -80,9 +79,9 @@ public class EmpDAO { // db처리
 			pstmt.setString(3, vo.getEmail());
 			pstmt.setString(4, vo.getJobId());
 			pstmt.setString(5, vo.getHireDate());
-			int r= pstmt.executeUpdate();
-				System.out.println(r+"건 입력완료.");
-				
+			int r = pstmt.executeUpdate();
+			System.out.println(r + "건 입력완료.");
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -91,46 +90,69 @@ public class EmpDAO { // db처리
 
 	// 한건수정
 	public void updateEmp(EmployeeVO vo) {
-		
+
 		conn = DAO.getConnection();
-		sql = "UPDATE emp1 "
-				+ "SET email = NVL('" + vo.getEmail()+ "', email)" //원래있던 컬럼값을 그대로 쓰세요 
-				+ ", phone_number= '"+vo.getPhoneNumber()+"'"//스트링 타입은 ' ' 사용
-				+ ", salary = " + vo.getSalary() 
-				+ "WHERE employee_id = " + vo.getEmployeeId();
-		
+		sql = "UPDATE emp1 " + "SET email = NVL('" + vo.getEmail() + "', email)" // 원래있던 컬럼값을 그대로 쓰세요
+				+ ", phone_number= '" + vo.getPhoneNumber() + "'"// 스트링 타입은 ' ' 사용
+				+ ", salary = " + vo.getSalary() + "WHERE employee_id = " + vo.getEmployeeId();
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			int r = pstmt .executeUpdate();
+			int r = pstmt.executeUpdate();
 			System.out.println(r + "건 수정됨.");
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		
-		
+
 	}
 
 	// 한건삭제
 	public void deleteEmp(int empId) {
 		conn = DAO.getConnection();
-		sql= "delete from emp1 where employee_id = ?";
+		sql = "delete from emp1 where employee_id = ?";
 		try {
-			pstmt= conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, empId);
-			int r = pstmt .executeUpdate();
+			int r = pstmt.executeUpdate();
 			System.out.println(r + "건 삭제됨.");
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
+	}
+
+	// 부서정보 조회
+	public List<EmployeeVO> getDeptList(String dept) {
+		conn = DAO.getConnection();
+		sql = "SELECT * FROM emp1\r\n"
+				+ "WHERE department_id = (SELECT department_id from departments Where department_name = ?)";
+		List<EmployeeVO> list = new ArrayList<EmployeeVO>();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dept);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				EmployeeVO vo = new EmployeeVO();
+				vo.setEmployeeId(rs.getInt("employee_id"));
+				vo.setFirstName(rs.getString("first_name"));
+				vo.setLastName(rs.getString("last_name"));
+				vo.setPhoneNumber(rs.getString("phone_number"));
+				vo.setSalary(rs.getInt("salary"));
+				list.add(vo);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

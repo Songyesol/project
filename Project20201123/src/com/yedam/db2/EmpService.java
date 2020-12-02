@@ -10,5 +10,6 @@ public interface EmpService {
 	public void insertEmp(EmployeeVO empV); // 입력
 	public void updateEmp(EmployeeVO empV);// 수정
 	public void deleteEmp(int empId); // 삭제 
+	public List<EmployeeVO> getDeptList(String dept); //부서정보 조회
 
 }

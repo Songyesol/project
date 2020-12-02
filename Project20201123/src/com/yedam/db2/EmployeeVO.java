@@ -9,6 +9,7 @@ public class EmployeeVO {
 	private String hireDate;
 	private String jobId;
 	private int salary;
+
 	
 	
 //생성자 
